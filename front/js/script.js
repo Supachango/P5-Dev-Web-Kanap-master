@@ -6,6 +6,8 @@ async function getCanapes(){
 
 //On entoure le code de génération par une boucle FOR
 for (let i= 0; i < canapes.length; i++ ){
+
+    //Code de génération
     //On crée une variable i pour récupérer le canapé à l'index du parcours de la boucle.
     const article = canapes[i]
 
@@ -18,13 +20,36 @@ for (let i= 0; i < canapes.length; i++ ){
     sectionItems.appendChild(articleElement);
 
 
-    //génération de la balise html img pour imageUrl déclarée imgK
-    const imgKElement = document.createElement("img")
+    //génération de la balise html <img> pour imageUrl déclarée imgK avec une propriété src pour la source de l'image
+    const imgKElement = document.createElement("img");
     imgKElement.src = article.imageUrl;
     //Ajout des éléments du DOM
-    articleElement.appendChild(imgKElement)
+    articleElement.appendChild(imgKElement);
 
-}
+    //génération de la balise html <p> pour altTxt déclarée altTxt avec une propriété alt pour s'afficher en l'absence de l'image
+    const altTxtElement = document.createElement("p");
+    altTxtElement.alt = article.altTxtElement;
+    //Ajout des éléments du DOM
+    articleElement.appendChild(altTxtElement);
+
+    //génération de la balise html <p> pour name déclarée name
+    const nomElement = document.createElement("p");
+    nomElement.innerText = article.name; 
+    //Ajout des éléménts du DOM
+    articleElement.appendChild(nomElement);
+
+    //génération de la balise html <p> pour price déclarée price
+    const priceElement = document.createElement("p");
+    priceElement.innerText = article.price;
+    //Ajout des elemens du DOM
+    articleElement.appendChild(priceElement);
+
+    //génération de la balise html <p> pour description déclarée descr
+    const descrElement = document.createElement("p");
+    descrElement.innerText = article.description;
+    //Ajout des élements du DOM
+    articleElement.appendChild(descrElement);
+    }
 }
 
 getCanapes()
