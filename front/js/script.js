@@ -39,7 +39,7 @@ for (let i= 0; i < canapes.length; i++ ){
     articleElement.appendChild(nomElement);
 
     //génération de la balise html <p> pour price déclarée price
-    const priceElement = document.createElement("p");
+    const priceElement = document.createElement("p" );
     priceElement.innerText = article.price;
     //Ajout des elemens du DOM
     articleElement.appendChild(priceElement);
