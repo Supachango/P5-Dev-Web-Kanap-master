@@ -1,0 +1,2 @@
+https://github.com/nullpunkt/excel-to-json/blob/master/src/main/java/net/nullpunkt/exceljson/convert/ExcelToJsonConverter.java
+

@@ -1,0 +1,51 @@
+async function getCanapes(){
+    const reponse = await fetch('http://localhost:3000/api/products')
+    const canapes = await reponse.json();
+    console.log (canapes)
+
+//On entoure le code de génération par une boucle FOR
+for (let i= 0; i < canapes.length; i++ ){
+
+    //Code de génération
+    //On crée une variable i pour récupérer le canapé à l'index du parcours de la boucle.
+    const article = canapes[i]
+
+    //Récupération de l'élément du DOM qui acceuillera les produits
+    const listeAcceuil = (canape) => {
+        const sectionItems = document.querySelector(".items");
+        
+
+        //Création d'un balise Lien/article pour aller sur une autre page
+        const canapeLink = document.createElement("a");
+        canapeLink.href = `./product.html?id=${canape._id}`;
+
+        //Création d'une balise article dédiée aux canapés
+        const canapeArticle = document.createElement("article"); 
+        //Ajout du DOM : On rattache la balise article à la section "item"
+        sectionItems.appendChild(canapeArticle);
+
+        //génération de la balise html <img> pour imageUrl déclarée imgK avec une propriété src pour la source de l'image
+        const canapeimgK = document.createElement("img");
+        canapeimgK.src = article.imageUrl;
+        //Ajout des éléments du DOM
+        canapeArticle.appendChild(canapeimgK);
+
+        //génération de la balise html <p> pour altTxt déclarée altTxt avec une propriété alt pour s'afficher en l'absence de l'image
+        const canapeAltTxt = document.createElement("p");
+        canapeAltTxt.alt = article.altTxtElement;
+        canapeArticle.appendChild(canapeAltTxt);
+
+        //génération de la balise html <p> pour name déclarée name
+        const nomCanape = document.createElement("p");
+        nomCanape.innerText = article.name; 
+        canapeArticle.appendChild(nomCanape);
+
+        //génération de la balise html <p> pour description déclarée descr
+        const descrCanape = document.createElement("p");
+        descrCanape.innerText = article.description;
+        canapeArticle.appendChild(descrCanape);
+    }
+    }    
+}
+
+getCanapes()
