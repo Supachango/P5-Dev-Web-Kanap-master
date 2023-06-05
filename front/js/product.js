@@ -56,9 +56,9 @@ displayProduct();
 // Affiche les produits
 
 
-// *** Pour le mentorat du 31 mai 2023 ***
+// *** Vu en mentorat du 31 mai 2023 ***
 
-// Anjou d'un panneau d'une écoute de clic souris sur le bouton "Ajouter au panier"
+// Ajout d'un panneau d'une écoute de clic souris sur le bouton "Ajouter au panier"
 const ajoutPanierBtn = document.getElementById("addToCart");
 ajoutPanierBtn.addEventListener("click", (e) => {
 //fonction lambda ou flechée donne la valeur de la fonction englobante
@@ -91,13 +91,14 @@ ajoutPanierBtn.addEventListener("click", (e) => {
         // && opérateur logique AND qui renvoie true si les comparaisons sont à true et false sinon
         produitPanier.color == productArray[i].color
         // Vérifie l'id du produit' ET la couleur avant d'en ajouter.
-      ) {
+      )
+      {
         productArray[i].quantity =
           productArray[i].quantity + produitPanier.quantity;
         if (productArray[i].quantity > 100) {
           productArray[i].quantity = 100;
           alert("Le nombre d'articles selectionnés est trop important !");
-          //Vérifie que le nombre de canapé mis au panier n'est pas égale à 100 ou plus
+          //Vérifie que le nombre de canapé mis au panier est inférieure à 100 ou lance une alerte
         }
         localStorage.setItem("panier", JSON.stringify(productArray));
         //converti une valeur javascript en chaine JSON
@@ -111,4 +112,16 @@ ajoutPanierBtn.addEventListener("click", (e) => {
     productArray.push(produitPanier);
     localStorage.setItem("panier", JSON.stringify(productArray));
   }
+  // Envoye une alerte pour l'ajout d'un article
+  if (productArray[i] > 1){
+    alert("De nouveaux articles ont été ajoutés")
+  }else if(productArray[i] == 1){
+    alert("Un nouvel article à été ajouté");
+  }else{
+    alert("Aucun article n'a été ajouté");
+  }
+    
 });
+
+
+

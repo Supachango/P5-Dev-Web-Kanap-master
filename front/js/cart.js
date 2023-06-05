@@ -106,7 +106,7 @@ getCart();
 let productArray = JSON.parse(localStorage.getItem("panier"));
 const produitsPanier = document.getElementById("cart__items");
 
-//Création d'un boucle pour l'affichage du panier
+//Création d'une boucle pour l'affichage du panier
 let squeletteProduitPanier = [];
 for (i = 0; i < productArray.length; i++) {
   squeletteProduitPanier =
