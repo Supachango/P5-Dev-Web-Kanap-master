@@ -71,6 +71,8 @@ ajoutPanierBtn.addEventListener("click", (e) => {
   const choixPrix = products.price;
   const choixImg = products.imageUrl;
   const choixImgAltTxt = products.altTxt;
+
+
   //Crée un objet Produit panier avec les critère id, nom
   let produitPanier = {
     id: choixID,
@@ -111,17 +113,22 @@ ajoutPanierBtn.addEventListener("click", (e) => {
   } else {
     productArray.push(produitPanier);
     localStorage.setItem("panier", JSON.stringify(productArray));
+  }   
+  if (choixNombre === "0") {
+    alert("Aucun élément n'a été ajouté au panier.");
+  } else if (choixNombre === "1") {
+    alert("Un élément a été ajouté au panier.");
+  } else {
+    alert("Plusieurs éléments ont été ajoutés au panier.");
   }
   // Envoye une alerte pour l'ajout d'un article
-  if (productArray[i] > 1){
-    alert("De nouveaux articles ont été ajoutés")
-  }else if(productArray[i] == 1){
-    alert("Un nouvel article à été ajouté");
-  }else{
-    alert("Aucun article n'a été ajouté");
-  }
-    
+
 });
+
+
+
+
+
 
 
 
