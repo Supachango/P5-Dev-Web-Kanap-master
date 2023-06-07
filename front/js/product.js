@@ -37,7 +37,7 @@ const displayProduct = async () => {
   price.textContent = `${products.price}`;
   description.textContent = `${products.description}`;
 
-//injection des choix de couleur dans le html
+//injection des choix de couleur dans le html + méthode simplifiée
 /*
   colors.innerHTML += products.colors
     .map(
@@ -73,57 +73,59 @@ ajoutPanierBtn.addEventListener("click", (e) => {
   const choixImgAltTxt = products.altTxt;
 
 
-  //Crée un objet Produit panier avec les critère id, nom
+  //Crée un objet Produit panier avec les critère id, nom et quantité
   let produitPanier = {
     id: choixID,
-    name: choixNom,
-    price: choixPrix,
     color: choixCouleur,
     quantity: parseInt(choixNombre, 10),
     //analyse une chaine de caractère fournit en argument et renvoie un entier exprimé dans une base de donnée.
-    img: choixImg,
-    alt: choixImgAltTxt,
   };
   //-----
-  if (localStorage.getItem("panier")) {
-    productArray = JSON.parse(localStorage.getItem("panier"));
-    for (i = 0; i < productArray.length; i++) {
-      if (
-        produitPanier.id == productArray[i].id &&
-        // && opérateur logique AND qui renvoie true si les comparaisons sont à true et false sinon
-        produitPanier.color == productArray[i].color
-        // Vérifie l'id du produit' ET la couleur avant d'en ajouter.
-      )
-      {
-        productArray[i].quantity =
-          productArray[i].quantity + produitPanier.quantity;
-        if (productArray[i].quantity > 100) {
-          productArray[i].quantity = 100;
-          alert("Le nombre d'articles selectionnés est trop important !");
-          //Vérifie que le nombre de canapé mis au panier est inférieure à 100 ou lance une alerte
+  if (produitPanier.color)
+  {
+      if (localStorage.getItem("panier")) {
+        productArray = JSON.parse(localStorage.getItem("panier"));
+        for (i = 0; i < productArray.length; i++) {
+          
+          if (
+            produitPanier.id == productArray[i].id &&
+            // && opérateur logique AND qui renvoie true si les comparaisons sont à true et false sinon
+            produitPanier.color == productArray[i].color
+            // Vérifie l'id du produit' ET la couleur avant d'en ajouter.
+          )
+          {
+            productArray[i].quantity =
+              productArray[i].quantity + produitPanier.quantity;
+            if (productArray[i].quantity > 100) {
+              productArray[i].quantity = 100;
+              alert("Le nombre d'articles selectionnés est trop important !");
+              //Vérifie que le nombre de canapé mis au panier est inférieure à 100 ou lance une alerte
+            }
+            localStorage.setItem("panier", JSON.stringify(productArray));
+            //converti une valeur javascript en chaine JSON
+            return;
+          }
         }
+        productArray.push(produitPanier);
         localStorage.setItem("panier", JSON.stringify(productArray));
-        //converti une valeur javascript en chaine JSON
-        return;
+        // Ajoute un élément à la fin du tableau de stockage ou met à jour la valeur
+      } else {
+        productArray.push(produitPanier);
+        localStorage.setItem("panier", JSON.stringify(productArray));
+      }   
+      if (choixNombre === "0") {
+        alert("Aucun élément n'a été ajouté au panier.");
+      } else if (choixNombre === "1") {
+        alert("Un élément a été ajouté au panier.");
+      } else {
+        alert("Plusieurs éléments ont été ajoutés au panier.");
       }
+      // Envoye une alerte pour l'ajout d'un article
     }
-    productArray.push(produitPanier);
-    localStorage.setItem("panier", JSON.stringify(productArray));
-    // Ajoute un élément à la fin du tableau de stockage ou met à jour la valeur
-  } else {
-    productArray.push(produitPanier);
-    localStorage.setItem("panier", JSON.stringify(productArray));
-  }   
-  if (choixNombre === "0") {
-    alert("Aucun élément n'a été ajouté au panier.");
-  } else if (choixNombre === "1") {
-    alert("Un élément a été ajouté au panier.");
-  } else {
-    alert("Plusieurs éléments ont été ajoutés au panier.");
-  }
-  // Envoye une alerte pour l'ajout d'un article
-
-});
+    else{
+      alert("Veuillez choisir une couleur")
+    }
+  });
 
 
 
