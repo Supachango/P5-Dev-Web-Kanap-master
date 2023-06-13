@@ -37,15 +37,7 @@ const displayProduct = async () => {
   price.textContent = `${products.price}`;
   description.textContent = `${products.description}`;
 
-//injection des choix de couleur dans le html + méthode simplifiée
-/*
-  colors.innerHTML += products.colors
-    .map(
-      (color) =>
-        `<option value="${color}">${color}</option>`
-    )
-    .join("");
-*/
+//injection des choix de couleur dans le html
 
   products.colors.forEach(color => {
     colors.innerHTML += `<option value="${color}">${color}</option>` 
@@ -54,7 +46,6 @@ const displayProduct = async () => {
 
 displayProduct();
 // Affiche les produits
-
 
 // *** Vu en mentorat du 31 mai 2023 ***
 
@@ -73,11 +64,12 @@ ajoutPanierBtn.addEventListener("click", (e) => {
   const choixImgAltTxt = products.altTxt;
 
 
-  //Crée un objet Produit panier avec les critère id, nom et quantité
+  //Crée un objet Produit panier avec les critères id, nom et quantité
   let produitPanier = {
     id: choixID,
     color: choixCouleur,
     quantity: parseInt(choixNombre, 10),
+       
     //analyse une chaine de caractère fournit en argument et renvoie un entier exprimé dans une base de donnée.
   };
   //-----
@@ -86,7 +78,6 @@ ajoutPanierBtn.addEventListener("click", (e) => {
       if (localStorage.getItem("panier")) {
         productArray = JSON.parse(localStorage.getItem("panier"));
         for (i = 0; i < productArray.length; i++) {
-          
           if (
             produitPanier.id == productArray[i].id &&
             // && opérateur logique AND qui renvoie true si les comparaisons sont à true et false sinon
