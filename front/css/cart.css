@@ -1,3 +1,8 @@
+/**********/
+/*Normalise/*
+/**********/
+
+
 /*********/
 /*GENERAL*/
 /*********/
@@ -95,18 +100,25 @@ h2 {
 }
 .cart__order__form {
 	width: 50%;
+
 }
 .cart__order__form__question {
 	display: flex;
 	flex-direction: column;
 	margin-bottom: 25px;
+	
 }
 .cart__order__form__question input {
 	border-radius: 13px;
-	border: 0;
+	border: solid black 0.1px;
 	height: 26px;
 	margin-top: 4px;
 }
+
+ input.invalide {
+	border: solid 1px red;
+}
+
 .cart__order__form__question input:focus {
 	outline: none;
 }

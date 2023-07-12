@@ -46,8 +46,7 @@ const displayProduct = async () => {
 
 displayProduct();
 // Affiche les produits
-
-// *** Vu en mentorat du 31 mai 2023 ***
+// Vu en mentorat du 31 mai 2023
 
 // Ajout d'un panneau d'une écoute de clic souris sur le bouton "Ajouter au panier"
 const ajoutPanierBtn = document.getElementById("addToCart");
@@ -58,10 +57,6 @@ ajoutPanierBtn.addEventListener("click", (e) => {
   const choixCouleur = document.getElementById("colors").value;
   const choixNombre = document.getElementById("quantity").value;
   const choixID = products._id;
-  const choixNom = products.name;
-  const choixPrix = products.price;
-  const choixImg = products.imageUrl;
-  const choixImgAltTxt = products.altTxt;
 
 
   //Crée un objet Produit panier avec les critères id, nom et quantité
@@ -69,7 +64,6 @@ ajoutPanierBtn.addEventListener("click", (e) => {
     id: choixID,
     color: choixCouleur,
     quantity: parseInt(choixNombre, 10),
-       
     //analyse une chaine de caractère fournit en argument et renvoie un entier exprimé dans une base de donnée.
   };
   //-----
@@ -94,7 +88,7 @@ ajoutPanierBtn.addEventListener("click", (e) => {
             }
             localStorage.setItem("panier", JSON.stringify(productArray));
             //converti une valeur javascript en chaine JSON
-            return;
+            //return;
           }
         }
         productArray.push(produitPanier);
