@@ -38,13 +38,13 @@ for (let i= 0; i < canapes.length; i++ ){
     //Ajout des éléments du DOM
     articleElement.appendChild(altTxtElement);
 
-    //génération de la balise html <p> pour name déclarée name
+    //génération de la balise html <p> pour "name" déclarée "name"
     const nomElement = document.createElement("p");
     nomElement.innerText = article.name; 
     //Ajout des éléménts du DOM
     articleElement.appendChild(nomElement);
 
-    //génération de la balise html <p> pour description déclarée descr
+    //génération de la balise html <p> pour "description" déclarée "descr"
     const descrElement = document.createElement("p");
     descrElement.innerText = article.description;
     //Ajout des élements du DOM
@@ -53,6 +53,8 @@ for (let i= 0; i < canapes.length; i++ ){
 };
 
 getCanapes()
+
+
 
 
 
