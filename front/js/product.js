@@ -1,4 +1,4 @@
-
+let products;
 //Code vu en mentorat le 17/05
 // Récupère les params de l'URL
 const urlParams = new URLSearchParams(document.location.search);
@@ -6,6 +6,7 @@ const urlParams = new URLSearchParams(document.location.search);
 const idProduct = urlParams.get("id"); 
 // retourne un nouvel URL avec l'ID
 const apiUrl = `http://localhost:3000/api/products/${idProduct}`; 
+
 
 // Va chercher le produit avec l'ID correspondant
 const fetchProduct = async () => {
@@ -50,7 +51,7 @@ displayProduct();
 
 // Ajout d'un panneau d'une écoute de clic souris sur le bouton "Ajouter au panier"
 const ajoutPanierBtn = document.getElementById("addToCart");
-ajoutPanierBtn.addEventListener("click", (e) => {
+ajoutPanierBtn.addEventListener("click", () => {
 //fonction lambda ou flechée donne la valeur de la fonction englobante
   let productArray = [];
   // Crée le tableau pour stocker les données dans le local storage
@@ -91,12 +92,10 @@ ajoutPanierBtn.addEventListener("click", (e) => {
             //return;
           }
         }
-        productArray.push(produitPanier);
         localStorage.setItem("panier", JSON.stringify(productArray));
         // Ajoute un élément à la fin du tableau de stockage ou met à jour la valeur
       } else {
         productArray.push(produitPanier);
-        localStorage.setItem("panier", JSON.stringify(productArray));
       }   
       if (choixNombre === "0") {
         alert("Aucun élément n'a été ajouté au panier.");
