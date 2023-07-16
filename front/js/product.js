@@ -9,10 +9,14 @@ const apiUrl = `http://localhost:3000/api/products/${idProduct}`;
 
 // Va chercher le produit avec l'ID correspondant
 const fetchProduct = async () => {
+//déclaration de fonction asynchrone pour la requète à venir encapsulée par la fonction lambda
   await fetch(apiUrl)
+  //appel de l'API avec l'opérateur await pour attendre la résolution
     .then((res) => res.json())
+    //convertion de la réponse de l'API en un objet JSON utilisable
     .then((data) => {
       products = data;
+    //stockage des données JSON dans une variable
     })
     .catch((error) => console.log(error));
 };
@@ -55,6 +59,7 @@ const ajoutPanierBtn = document.getElementById("addToCart");
 
 ajoutPanierBtn.addEventListener("click", () => {
   let productArray = [];
+  //création d'un tableau pour changer la quantité d'article sélectionnés
   const choixCouleur = document.getElementById("colors").value;
   const choixNombre = document.getElementById("quantity").value;
   const choixID = products._id;
@@ -66,6 +71,7 @@ ajoutPanierBtn.addEventListener("click", () => {
   };
 
   let articleExisteDansPanier = false;
+  // méthode du drapeau : Variable témoin : Le produit n'existe pas 
 
   if (produitPanier.color) {
     if (localStorage.getItem("panier")) {
@@ -82,24 +88,31 @@ ajoutPanierBtn.addEventListener("click", () => {
           }
           articleExisteDansPanier = true;
           break;
+          //arrète la variable témoin : Le produit existe
         }
       }
     }
 
     if (!articleExisteDansPanier) {
+    // Si le produit existe on en ajoute un ou plusieurs  
       productArray.push(produitPanier);
     }
 
     localStorage.setItem("panier", JSON.stringify(productArray));
+    // modifie le nombre d'article de la même couleur dans le local storage
 
     if (choixNombre === "0") {
+    // si le choix du nombre d'article est strictement égal à 0, message pop-up:  
       alert("Aucun élément n'a été ajouté au panier.");
     } else if (choixNombre === "1") {
+          // sinon si le choix du nombre d'article est strictement égal à 1, message alerte pop-up:   
       alert("Un élément a été ajouté au panier.");
     } else {
+          // sinon; message pop-up:
       alert("Plusieurs éléments ont été ajoutés au panier.");
     }
   } else {
     alert("Veuillez choisir une couleur.");
+    // sinon (pas de couleur sélectionnée) message alerte pop-up:
   }
 });

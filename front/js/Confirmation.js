@@ -9,6 +9,7 @@ if (idCommande == "undefined" || idCommande == null || idCommande == "") {
 }
 
 localStorage.clear()
+// supprime le local storage au moment de la création d'un numéro de commande
 
 let span = document.getElementById("orderId");
 span.innerHTML = idCommande 
