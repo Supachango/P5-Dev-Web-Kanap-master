@@ -2,10 +2,12 @@
 async function getCanapes(){
     try {
         const reponse = await fetch('http://localhost:3000/api/products');
+        // L'argument obligatoire de Fetch est l'url des ressources à récupérer.
         if (!reponse.ok) {
             throw new Error('Le serveur est inaccessible');
         }
         const canapes = await reponse.json();
+        // La promesse est résolue par l'objet reponse. On indique le format choisi : JSON
         console.log (canapes);
         
         //On entoure le code de génération par une boucle FOR
@@ -13,13 +15,11 @@ async function getCanapes(){
             
             //On crée une variable i pour récupérer le canapé à l'index du parcours de la boucle dans le tableau.
             const article = canapes[i];
-            
             //Récupération de l'élément du DOM qui acceuillera les produits
             const sectionItems = document.querySelector(".items");
             
             const KLink = document.createElement('a');
             KLink.href=`./product.html?id=${article._id}`;
-            //ajouté avec Greg
             sectionItems.appendChild (KLink);
             
             

@@ -1,7 +1,8 @@
-// Méthode du squelette
+
 async function getCart() {
   // Création d'un tableau qui récupère les items du panier
   let productArray = JSON.parse(localStorage.getItem("panier"));
+  // La méthode parse est l'inverse de Stringify : Elle convertit du JSON en Javascript.
   const produitsPanier = document.getElementById("cart__items");
   
   // Création d'une boucle pour l'affichage du panier
@@ -11,16 +12,19 @@ async function getCart() {
     
     const apiUrl = `http://localhost:3000/api/products/${idProduct}`;
     const fetchProduct = async (apiUrl) => {
+    //déclaration de fonction asynchrone pour la requète à venir encapsulée par la fonction lambda
       return await fetch(apiUrl)
       .then((res) => res.json())
+      // chainage du gestionnaire de promesse est résolu par l'objet reponse. 
+      //On indique le format choisi : JSON
       .catch((error) => console.log(error));
+      //gestionnaire d'erreur
     };
     const products = await fetchProduct(apiUrl);
     squeletteProduitPanier +=
     // Concaténation ou stockage de la valeur dans la variable.
     // Le squelette est un gabarit littéral écrit en <html>, lui-même composé de gabarits littéraux
-    // Insertion de l'image et texte alternatif
-    // Insertion du nom, de la couleur, et du prix.
+    // Inplémentation de l'image et texte alternatif, du nom, de la couleur, et du prix.
     `
     <article class="cart__item" data-id="${productArray[i].id}" data-color="${productArray[i].color}">
       <div class="cart__item__img">
@@ -35,7 +39,8 @@ async function getCart() {
         <div class="cart__item__content__settings">
           <div class="cart__item__content__settings__quantity">
             <p>Qté : </p>
-            <input type="number" class="itemQuantity" name="itemQuantity" min="1" max="100" data-id="${productArray[i].id}" data-color="${productArray[i].color}" value="${productArray[i].quantity}">
+            <input type="number" class="itemQuantity" name="itemQuantity" min="1" max="100" 
+            data-id="${productArray[i].id}" data-color="${productArray[i].color}" value="${productArray[i].quantity}">
           </div>
           <div class="cart__item__content__settings__delete">
             <p class="deleteItem">Supprimer</p>
@@ -55,13 +60,16 @@ getCart();
 // Fonction suppression d'un élément du panier
 function supprItemPanier(color, id) {
   let productArray = JSON.parse(localStorage.getItem("panier"));
+  // La méthode parse est l'inverse de Stringify : Elle convertit des du JSON en Javascript.
 
   const PanierMaj = productArray.filter(
+  // méthode qui créer et retourne un nouveau tableau avec les éléments du tableau d'origine qui remplissent la condition suivante:
     (item) => item.color !== color || item.id !== id
     );
-    // Filtre tous les produits sauf ceux qui ont le même id et couleur que celui appelé par le clic/bouton
-    // Logique l'inverse de même couleur ET même id c'est OU
+    // Filtre tous les produits sauf ceux qui ont le même id et la même couleur que celui appelé par le clic/bouton
+    // Logique JS : l'inverse de même couleur ET même id c'est OU
     localStorage.setItem("panier", JSON.stringify(PanierMaj));
+    // La commande stringify convertit des objets Javascript en JSON.
     alert("Le produit a été supprimé");
     window.location.reload();
     // Recharge la page après avoir changé le local storage
@@ -85,18 +93,24 @@ function supprItemPanier(color, id) {
     const quantityInputs = document.querySelectorAll(".itemQuantity");
     quantityInputs.forEach((input) => {
       input.addEventListener("change", (event) => {
+      //Une fonction de rappel est exécutée avec l'objet event. Cela se produit lorsque l'utilisateur modifie la qte.  
         const parentArticle = event.target.closest(".cart__item");
+
         const id = parentArticle.dataset.id;
         const color = parentArticle.dataset.color;
         const quantity = parseInt(event.target.value);
+        // On va "parser" en Integer c'est à dire en nombres entiers.
         
         let productArray = JSON.parse(localStorage.getItem("panier"));
+        // La commande parse est l'inverse de Stringify : Elle convertit du JSON en Javascript
         for (let i = 0; i < productArray.length; i++) {
           if (productArray[i].id === id && productArray[i].color === color) {
             productArray[i].quantity = quantity;
+            //Logique JS : Si l'élement du panier qui a la même Id et la même que celui dans le local storage alors on change sa quantité 
           }
         }
         localStorage.setItem("panier", JSON.stringify(productArray));
+        // La méthode setitem stock des donnée dans le local storage : La commande stringify convertit des objets Javascript en JSON.
       });
     });
   }
@@ -142,13 +156,13 @@ function supprItemPanier(color, id) {
     
     const champs = [
       { input: nomInput, regex: regexNom, errorMessage: "Indiquez votre prénom sans chiffre ni caractères spéciaux" },
-      { input: prenomInput, regex: regexPrenom, errorMessage: "Indiquez votre énom sans chiffre ni caractères spéciaux" },
+      { input: prenomInput, regex: regexPrenom, errorMessage: "Indiquez votre nom sans chiffre ni caractères spéciaux" },
       { input: adresseInput, regex: regexAdresse, errorMessage: "Indiquez votre adresse suivi d'un code postal" },
       { input: villeInput, regex: regexVille, errorMessage: "Indiquez votre ville sans chiffre ni caractères spéciaux" },
       { input: emailInput, regex: regexEmail, errorMessage: "Indiquez votre mail dans le format obligatoire" }
     ];
     
-    //technique des drapeaux : piège à souris 1/3
+    //technique des drapeaux 1/3
     let estValide = true;
     
     champs.forEach((champ) => {
@@ -172,6 +186,7 @@ function supprItemPanier(color, id) {
       console.log ('Formulaire OK')
       
       // Récupère les données du formulaire et du panier pour envoyer un objet commande à l'API
+      // contitué d'un tableau d'article "products" et un objet de contact.
       // vu en mentorat le 12/07
       const contact = {
         firstName : document.getElementById("firstName").value,
@@ -181,8 +196,9 @@ function supprItemPanier(color, id) {
         city : document.getElementById("city").value,
       };
       
-      //récriture de la variable pour qu'elle soit hors de la fonction ligne 93
+      //récriture de la variable pour qu'elle soit hors de la fonction ligne 100
       let productArray = JSON.parse(localStorage.getItem("panier"));
+      // La commande parse est l'inverse de Stringify : Elle convertit des du JSON en Javascript
       
       const products = [];
       productArray.forEach((kanap) => {
@@ -197,7 +213,9 @@ function supprItemPanier(color, id) {
       
       fetch("http://localhost:3000/api/products/order", {
       method: "POST",
+      // Ici l'option de Fetch n'est pas celle par défaut (GET) mais POST pour envoyer des données.
       body: JSON.stringify(order),
+      // La commande stringify convertit des objets Javascript en JSON.
       headers: { "Content-Type": "application/json" },
     })
     .then((res) => {

@@ -1,5 +1,5 @@
 let products = []
-//Code vu en mentorat le 17/05
+
 // Récupère les params de l'URL
 const urlParams = new URLSearchParams(document.location.search);
 // Prends l'ID dans les params
@@ -50,7 +50,7 @@ const displayProduct = async () => {
 
 displayProduct();
 // Affiche les produits
-// Vu en mentorat du 31 mai 2023
+
 
 
 const ajoutPanierBtn = document.getElementById("addToCart");
@@ -94,7 +94,7 @@ ajoutPanierBtn.addEventListener("click", () => {
     }
 
     if (!articleExisteDansPanier) {
-    // Si le produit existe on en ajoute un ou plusieurs  
+    // Si le produit n'existe pas déjà on en ajoute un ou plusieurs  
       productArray.push(produitPanier);
     }
 
